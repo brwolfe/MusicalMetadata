@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+    <head>
+        <title><%=item.name%></title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+
+        <div id="Navigation">
+            <p><a href="/" rel="AllMetada">Metadata Home</a> | <a href="/artists/" rel="AllArtists">All Artists</a> | <a href="/albums/" rel="AllAlbums">All Albums</a> | <a href="/tracks/" rel="AllTracks">All Tracks</a> | <a href="/genres/" rel="AllGenres">All Genres</a> | <a href="/formats/" rel="AllFormats">All Formats</a> | <a href="/years/" rel="AllYears">All Years</a></p>
+        </div>
+
+        <div itemscope="http://schema.org/MusicRecording">
+            <h1 itemprop="name"><%=item.name%></h1>
+    
+            <p itemprop="byArtist" itemscope itemtype="http://www.schema.org/MusicGroup">Artist:
+                <a href="/artists/<%=item.byArtist%>" rel="artist" itemprop="URL">
+                    <span itemprop="name"><%=item.artistName%></span>
+                </a>
+            </p>            
+    
+            <p itemprop="inAlbum" itemscope itemtype="http://www.schema.org/MusicAlbum">Album:
+                <a href="/albums/<%=item.inAlbum%>" rel="album" itemprop="URL">    
+                    <span itemprop="name"><%=item.albumName%></span>
+                </a>
+            </p>
+    
+            <p itemprop="inYear" itemscope itemtype="http://www.schema.org/MusicAlbum">Year:
+                <a href="/years/<%=item.inYear%>" rel="year" itemprop="URL">    
+                    <span itemprop="name"><%=item.inYear%></span>
+                </a>
+            </p>
+
+            <p itemprop="inGenre" itemscope itemtype="http://www.schema.org/MusicAlbum">Genre:
+                <a href="/genres/<%=item.inGenre%>" rel="genre" itemprop="URL">    
+                    <span itemprop="name"><%=item.inGenre%></span>
+                </a>
+            </p>
+
+            <p itemprop="inFormat" itemscope itemtype="http://www.schema.org/MusicAlbum">Format:
+                <a href="/formats/<%=item.inFormat%>" rel="format" itemprop="URL">    
+                    <span itemprop="name"><%=item.inFormat%></span>
+                </a>
+            </p>
+
+
+        </div>    
+    </body>
+</html>

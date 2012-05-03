@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Musical Metadata: Genres</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+
+        <div id="Navigation">
+        <p><a href="/" rel="AllMetada">Metadata Home</a> | <a href="/artists/" rel="AllArtists">All Artists</a> | <a href="/albums/" rel="AllAlbums">All Albums</a> | <a href="/tracks/" rel="AllTracks">All Tracks</a> | All Genres | <a href="/formats/" rel="AllFormats">All Formats</a> | <a href="/years/" rel="AllYears">All Years</a></p>
+        </div>
+
+        <h1>Genres</h1>
+            <% if (items.length > 0) { %>
+                <ul id="Genres">
+                    <% items.forEach(function(item) { %>
+                        <li itemscope itemtype="http://schema.org/MusicRecording" class="SpecificGenre"><a itemprop="URL" rel="genre" href="/genres/<%=item._id%>"><span itemprop="name"><%=item.name%></span></a></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <div>No genres have been added.</div>
+            <% } %>
+
+
+        <div id="Search">
+
+           <h2>Search for genres</h2>
+
+            <form method="get" id="SearchGenres" action="/genres/">
+             <label>Genre: <input name="name"></label>
+             <input type="submit" value="Search" name="SubmitButton" />
+            </form>
+
+        </div>
+
+        <div>
+
+            <h2>Add or update a new genre</h2>
+
+            <script>
+            function onFormSubmit(form) {
+                form.action = form.action + form.elements['item[id]'].value;
+                console.log(form.action);
+                return true;
+            } 
+            </script>
+
+              <form method="post" id="NewGenreValue" action="/genres/"
+                    onsubmit="return onFormSubmit(this);">
+                <input type="hidden" name="_method" value="put">
+                <label>Genre ID<br>
+                (lowercase letters only, no spaces):
+                <input name="item[id]" type="text" pattern="[a-z]+" required
+                        placeholder="hiphop">
+                </label>
+                <label>Genre name: 
+                <input name="item[name]" type="text" required
+                        placeholder="Hip-hop">
+                </label>
+                <button>Add or update</button>
+              </form>
+
+    </div>
+
+    </body>
+</html>

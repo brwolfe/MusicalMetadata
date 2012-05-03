@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Musical Metadata: Formats</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+
+        <div id="Navigation">
+        <p><a href="/" rel="AllMetada">Metadata Home</a> | <a href="/artists/" rel="AllArtists">All Artists</a> | <a href="/albums/" rel="AllAlbums">All Albums</a> | <a href="/tracks/" rel="AllTracks">All Tracks</a> | <a href="/genres/" rel="AllGenres">All Genres</a> | All Formats | <a href="/years/" rel="AllYears">All Years</a></p>
+        </div>
+
+        <h1>Formats</h1>
+            <% if (items.length > 0) { %>
+                <ul id="Formats">
+                    <% items.forEach(function(item) { %>
+                        <li itemscope itemtype="http://schema.org/MusicRecording" class="SpecificFormat"><a itemprop="URL" rel="format" href="/formats/<%=item._id%>"><span itemprop="name"><%=item.name%></span></a></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <div>No formats have been added.</div>
+            <% } %>
+
+
+        <div id="Search">
+
+           <h2>Search for formats</h2>
+
+            <form method="get" id="SearchFormats" action="/formats/">
+             <label>Format: <input name="name"></label>
+             <input type="submit" value="Search" name="SubmitButton" />
+            </form>
+
+        </div>
+
+    <div>
+
+      <h2>Add or update a new format</h2>
+      <script>
+      function onFormSubmit(form) {
+        form.action = form.action + form.elements['item[id]'].value;
+        console.log(form.action);
+        return true;
+      } 
+      </script>
+
+      <form method="post" id="NewFormatValue" action="/formats/"
+            onsubmit="return onFormSubmit(this);">
+        <input type="hidden" name="_method" value="put">
+        <label>Format ID<br>
+          (lowercase letters only, no spaces):
+          <input name="item[id]" type="text" pattern="[a-z]+" required
+                 placeholder="wma">
+        </label>
+        <label>Format Name: 
+          <input name="item[name]" type="text" required
+                 placeholder="Windows Media Audio - WMA">
+        </label>
+        <button>Add or update</button>
+      </form>
+
+    </div>
+
+    </body>
+</html>

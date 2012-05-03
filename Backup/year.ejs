@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <title><%=item.name%></title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <div id="Navigation">
+            <p><a href="/" rel="AllMetada">Metadata Home</a> | <a href="/artists/" rel="AllArtists">All Artists</a> | <a href="/albums/" rel="AllAlbums">All Albums</a> | <a href="/tracks/" rel="AllTracks">All Tracks</a> | <a href="/genres/" rel="AllGenres">All Genres</a> | <a href="/formats/" rel="AllFormats">All Formats</a> | <a href="/years/" rel="AllYears">All Years</a></p>
+        </div>
+
+        <h1><span itemprop="name"<%=item.name%></span>
+
+         <div itemscope itemtype="http://schema.org/MusicGroup">
+            <h2><span itemprop="name"><%=item.name%></span>'s Albums:</h2>
+            <ul id="Albums">    
+                <% if (related_items.length > 0) { %>
+                    <% related_items.forEach(function(related_item) { %>
+                        <li class="SpecificAlbum" itemprop="album" itemscope itemtype="http://schema.org/MusicAlbum">
+                            <strong><a itemprop="URL" rel="album" href="/albums/<%=related_item._id%>"><span itemprop="name"><%=related_item.name%></span></a></strong><br />
+                                <% } %>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <div>No albums have been added for <%=item.name%>.</div>
+                <% } %>
+            </ul>
+        </div>
+
+         <div itemscope itemtype="http://schema.org/MusicGroup">
+            <h2><span itemprop="name"><%=item.name%></span>'s Tracks:</h2>
+            <ul id="Tracks">    
+                <% if (related_items.length > 0) { %>
+                    <% related_items.forEach(function(related_item) { %>
+                        <li class="SpecificTrack" itemprop="track" itemscope itemtype="http://schema.org/MusicAlbum">
+                            <strong><a itemprop="URL" rel="track" href="/tracks/<%=related_item._id%>"><span itemprop="name"><%=related_item.name%></span></a></strong><br />
+                                <% } %>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <div>No tracks have been added for <%=item.name%>.</div>
+                <% } %>
+            </ul>
+        </div>
+    
+    </body>
+</html>
